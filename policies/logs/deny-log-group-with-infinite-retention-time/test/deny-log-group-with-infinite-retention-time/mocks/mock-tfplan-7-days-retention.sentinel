@@ -1,0 +1,40 @@
+resource_changes = {
+	"aws_cloudwatch_log_group.this": {
+		"address": "aws_cloudwatch_log_group.this",
+		"change": {
+			"actions": [
+				"create",
+			],
+			"after": {
+				"kms_key_id":        null,
+				"name":              "sentinel-terraform-aws-cloudwatch",
+				"retention_in_days": 7,
+				"skip_destroy":      false,
+				"tags": {
+					"Application": "Sentinel",
+					"Environment": "production",
+				},
+				"tags_all": {
+					"Application": "Sentinel",
+					"Environment": "production",
+				},
+			},
+			"after_unknown": {
+				"arn":             true,
+				"id":              true,
+				"log_group_class": true,
+				"name_prefix":     true,
+				"tags":            {},
+				"tags_all":        {},
+			},
+			"before": null,
+		},
+		"deposed":        "",
+		"index":          null,
+		"mode":           "managed",
+		"module_address": "",
+		"name":           "this",
+		"provider_name":  "registry.terraform.io/hashicorp/aws",
+		"type":           "aws_cloudwatch_log_group",
+	},
+}

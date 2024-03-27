@@ -1,0 +1,17 @@
+import "tfplan/v2" as tfplan
+
+cloudwatch_log_groups = filter tfplan.resource_changes as _, resource {
+	resource.mode == "managed" and
+		resource.type == "aws_cloudwatch_log_group" and
+		(resource.change.actions contains "create" or resource.change.actions == ["update"])
+}
+
+cloudwatch_log_group_retention_not_infinite = rule {
+	all cloudwatch_log_groups as _, cloudwatch_log_group {
+		cloudwatch_log_group.change.after.retention_in_days != 0
+	}
+}
+
+main = rule {
+	cloudwatch_log_group_retention_not_infinite
+}
